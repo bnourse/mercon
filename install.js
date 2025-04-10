@@ -40,7 +40,7 @@ function runCommand(command, errorMessage) {
 
 // 1. Make the script executable on Unix systems
 if (os.platform() !== 'win32') {
-  const scriptPath = path.join(__dirname, 'clipboard-to-image.js');
+  const scriptPath = path.join(__dirname, 'mercon.js');
   
   try {
     console.log(`${colors.yellow}Making script executable...${colors.reset}`);
@@ -50,6 +50,8 @@ if (os.platform() !== 'win32') {
     console.error(`${colors.red}Error making script executable: ${error.message}${colors.reset}`);
     console.log(`${colors.yellow}You may need to run 'chmod +x ${scriptPath}' manually.${colors.reset}`);
   }
+} else {
+  console.log(`${colors.yellow}Skipping executable permissions on Windows.${colors.reset}`);
 }
 
 // 2. Install dependencies
@@ -59,7 +61,14 @@ if (!runCommand('npm install', 'Failed to install dependencies.')) {
 }
 
 // 3. Install the package globally
-console.log(`${colors.blue}\nInstalling mermaid-convert globally...${colors.reset}`);
+console.log(`${colors.blue}\nInstalling mercon globally...${colors.reset}`);
+
+// Check if running as root on Unix systems
+if (os.platform() !== 'win32' && typeof process.getuid === 'function' && process.getuid() === 0) {
+  console.log(`${colors.yellow}Warning: Running as root. Consider using npm without sudo for better security.${colors.reset}`);
+  console.log(`${colors.yellow}See https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally${colors.reset}`);
+}
+
 if (!runCommand('npm install -g .', 'Failed to install package globally.')) {
   console.log(`${colors.yellow}You might need to use sudo or adjust npm permissions.${colors.reset}`);
   console.log(`${colors.yellow}See INSTALLATION.md for troubleshooting tips.${colors.reset}`);

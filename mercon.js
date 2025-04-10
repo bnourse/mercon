@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * Mermaid Clipboard Converter
+ * Mermaid Converter (mercon)
  * 
  * A command-line tool that takes Mermaid diagram text from the system clipboard
  * and converts it to various image formats using mermaid-cli.
  * 
- * Usage: mermaid-convert [options]
+ * Usage: mercon [options]
  * 
  * Options:
  *   -f, --format <format>    Output format (png, svg, pdf) [default: png]

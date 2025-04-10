@@ -1,14 +1,15 @@
 {
-  "name": "mermaid-clipboard-converter",
+  "name": "mercon",
   "version": "1.0.0",
   "description": "Convert Mermaid diagram text from clipboard to various image formats using mermaid-cli",
-  "main": "clipboard-to-image.js",
+  "main": "mercon.js",
   "bin": {
-    "mermaid-convert": "./clipboard-to-image.js"
+    "mermaid-convert": "./mercon.js",
+    "mercon": "./mercon.js"
   },
   "preferGlobal": true,
   "scripts": {
-    "start": "node clipboard-to-image.js"
+    "start": "node mercon.js"
   },
   "keywords": [
     "mermaid",
